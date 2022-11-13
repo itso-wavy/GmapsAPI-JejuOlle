@@ -1,0 +1,79 @@
+h1, p {
+    margin: 0;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'jeju';
+    src: url(../font/EF_jejudoldam.ttf) format('truetype');
+}
+
+/* Components */
+body {
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+}
+
+.wrapper {
+    width: fit-content;
+    margin: 35px auto 0;
+    padding-bottom: 30px;
+    background: url(https://images.unsplash.com/photo-1654521796656-48e9774d4a12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80) center/cover;
+    border: 10px solid #C4E1F2;
+    box-shadow: 10px 12px 2px 1px rgba(0, 0, 255, .2);
+    border-radius: 100px;
+    text-align: center;
+}
+
+.header {
+    font-family: 'jeju';
+    color: rgb(255, 255, 255);
+}
+
+.tit-txt {
+    font-size: 32px;
+    padding-top: 15px;
+    color: #faee41;
+    vertical-align: text-top;
+}
+
+.tit-txt .txt-dol, .txt-mtn {
+    font-size: 70px;
+}
+
+.tit-txt .txt-dol {
+    color: #878f96;
+}
+
+.tit-txt .txt-mtn {
+    color: #087216;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 500;
+    padding-bottom: 30px;
+}
+
+.app {
+    width: fit-content;
+    border-radius: 20px;
+    padding: 0 60px;
+}
+
+#map {
+    width: 700px;
+    height: 450px;
+    border-radius: 15px;
+}
+
+.ollename {
+    font-weight: bold;
+}
+
+.ollelength, .olletime {
+    color: #585e63;
+}
+
+.olletime {
+
+}

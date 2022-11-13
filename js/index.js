@@ -8,33 +8,35 @@ function initMap() {
             data = r.data;
         })
         .then(() => {
-            const ollestay = { lat: 33.2474043, lng: 126.5587322 };
+            // map과 지도 중심점 설정
             const map = new google.maps.Map(
                 document.getElementById("map"),
                 {
-                    zoom: 10,
-                    center: ollestay,
+                    zoom: 10.3,
+                    center: { lat: 33.381766, lng: 126.582801 },
                 }
             );
 
-            new google.maps.Marker({
-                position: ollestay,
+            const jeju = new google.maps.Marker({
+                position: { lat: 33.381766, lng: 126.582801 },
                 map: map,
             });
 
+            // 안내창 설정, 클릭이벤트 부여
             for (let i = 0; i < data.length; i++) {
                 const marker = new google.maps.Marker({
-                    label: data[i]["courseNumber"],
+                    label: parseInt(data[i]["courseNumber"]).toString(),
                     name: data[i]["courseName"],
                     position: { lat: data[i]["startLatitude"], lng: data[i]["startLongitude"] },
                     map: map,
+                    length: data[i]["courseLength"],
+                    time: data[i]["estimatedTime"],
                 });
 
-                const infoWindow = new google.maps.InfoWindow();
-
                 marker.addListener('click', () => {
+                    const content = '<p class="ollename">' + marker.name + '</p><p class="ollelength">' + marker.length + ' km</p><p class="olletime">약 ' + marker.time + '시간</p>';
                     map.panTo(marker.position);
-                    infoWindow.setContent(marker.name);
+                    infoWindow.setContent(content);
                     infoWindow.open({
                         anchor: marker,
                         map,
@@ -42,25 +44,74 @@ function initMap() {
                 })
             }
 
-            const infowindow = new google.maps.InfoWindow({
-                content: "Hello <br> World!",
+            // 핫플레이스 표시
+            const ollestay = new google.maps.Marker({
+                label: '🏡',
+                name: '제주올레여행자센터',
+                position: { lat: 33.2474043, lng: 126.5587322 },
+                map: map,
             });
-            infowindow.open(map, marker2);
-            
-            // data = [
-            //     {
-            //         "courseNumber": "1코스",
-            //         "courseName": "시흥-광치기 올레",
-            //         "wheelchairCourseFlag": true,
-            //         "startPoint": "시흥초등학교",
-            //         "startLatitude": 33.479715140000000,
-            //         "startLongitude": 126.895649400000000,
-            //         "endPoint": "광치기해변",
-            //         "endLatitude": 33.452392540000000,
-            //         "endLongitude": 126.924704100000000,
-            //         "courseLength": 15,
-            //         "estimatedTime": "4~5"
-            //       },
-            // ]
+
+            const winiv = new google.maps.Marker({
+                label: '🐱',
+                name: '주식회사 위니브',
+                position: { lat: 33.5083269, lng: 126.5410764 },
+                map: map,
+            });
+
+            const osulloc = new google.maps.Marker({
+                label: '🍵',
+                name: '오설록 티 뮤지엄',
+                position: { lat: 33.3058932, lng: 126.289534 },
+                map: map,
+            });
+
+            ollestay.addListener('click', () => {
+                map.panTo(ollestay.position);
+                infoWindow.setContent('<p class="ollename">' + ollestay.name + '</p>');
+                infoWindow.open({
+                    anchor: ollestay,
+                    map,
+                });
+            })
+
+            winiv.addListener('click', () => {
+                map.panTo(winiv.position);
+                infoWindow.setContent('<p class="ollename">' + winiv.name + '</p>');
+                infoWindow.open({
+                    anchor: winiv,
+                    map,
+                });
+            })
+
+            osulloc.addListener('click', () => {
+                map.panTo(osulloc.position);
+                infoWindow.setContent('<p class="ollename">' + osulloc.name + '</p>');
+                infoWindow.open({
+                    anchor: osulloc,
+                    map,
+                });
+            })
+
+            // 인사창 설정
+            const firstwindow = new google.maps.InfoWindow({
+                content: "Hello Stranger!",
+            });
+            firstwindow.open(map, jeju);
+            const infoWindow = new google.maps.InfoWindow();
+
+            // 써클 표식
+            const myCity = new google.maps.Circle({
+                center: ollestay.position,
+                radius: 200,
+                strokeColor: "#F26E22",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#F26E22",
+                fillOpacity: 0.3,
+            });
+
+            myCity.setMap(map);
         });
 }
+
