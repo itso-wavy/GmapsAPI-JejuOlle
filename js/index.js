@@ -52,7 +52,7 @@ function initMap() {
                 map: map,
             });
 
-            const winiv = new google.maps.Marker({
+            const weniv = new google.maps.Marker({
                 label: '🐱',
                 name: '주식회사 위니브',
                 position: { lat: 33.5083269, lng: 126.5410764 },
@@ -75,11 +75,11 @@ function initMap() {
                 });
             })
 
-            winiv.addListener('click', () => {
-                map.panTo(winiv.position);
-                infoWindow.setContent('<p class="ollename">' + winiv.name + '</p>');
+            weniv.addListener('click', () => {
+                map.panTo(weniv.position);
+                infoWindow.setContent('<p class="ollename">' + weniv.name + '</p>');
                 infoWindow.open({
-                    anchor: winiv,
+                    anchor: weniv,
                     map,
                 });
             })
